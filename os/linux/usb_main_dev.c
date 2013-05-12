@@ -308,7 +308,7 @@ static void rtusb_disconnect(struct usb_interface *intf)
 {
 	struct usb_device   *dev = interface_to_usbdev(intf);
 	VOID				*pAd;
-
+	printk("rtusb_disconnect\n");
 
 	pAd = usb_get_intfdata(intf);
 #ifdef IFUP_IN_PROBE	

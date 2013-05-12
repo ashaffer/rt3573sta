@@ -96,6 +96,7 @@ static void RtmpTimerQHandle(RTMP_ADAPTER *pAd)
 
 		if (RtmpOSTaskWait(pAd, pTask, &status) == FALSE)
 		{
+			DBGPRINT_ERR(("RtmpOSTaskWait returned false, setting fRTMP_ADAPTER_HALT_IN_PROGRESS flag\n"));
 			RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_HALT_IN_PROGRESS);
 			break;
 		}

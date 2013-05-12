@@ -1250,7 +1250,7 @@ VOID	RTUSBCancelPendingBulkInIRP(
 	PRX_CONTEXT		pRxContext;
 	UINT			i;
 
-	DBGPRINT_RAW(RT_DEBUG_TRACE, ("--->RTUSBCancelPendingBulkInIRP\n"));
+	DBGPRINT_RAW(RT_DEBUG_ERROR, ("--->RTUSBCancelPendingBulkInIRP\n"));
 	for ( i = 0; i < (RX_RING_SIZE); i++)
 	{
 		pRxContext = &(pAd->RxContext[i]);
@@ -1295,7 +1295,7 @@ VOID	RTUSBCancelPendingBulkOutIRP(
 
 /*	pLock = &pAd->BulkOutLock[MGMTPIPEIDX];*/
 /*	pPending = &pAd->BulkOutPending[MGMTPIPEIDX];*/
-
+	DBGPRINT_RAW(RT_DEBUG_ERROR, ("RTUSBCancelPendingBulkOut called!\n"));
 	for (Idx = 0; Idx < 4; Idx++)
 	{
 		pHTTXContext = &(pAd->TxContext[Idx]);

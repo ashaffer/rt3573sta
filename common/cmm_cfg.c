@@ -856,8 +856,10 @@ INT RTMP_COM_IoctlHandle(
 			RT_CMD_INF_UP_DOWN *pInfConf = (RT_CMD_INF_UP_DOWN *)pData;
 
 			VIRTUAL_IF_DEC(pAd);
-			if (VIRTUAL_IF_NUM(pAd) == 0)
+			if (VIRTUAL_IF_NUM(pAd) == 0) {
+				DBGPRINT(RT_DEBUG_ERROR, ("calling rt28xx_close from CMD_RTPRIV_IOCTL_VIRTUAL_INF_DOWN!\n"));
 				pInfConf->rt28xx_close(pAd->net_dev);
+			}
 		}
 			break;
 

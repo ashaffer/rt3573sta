@@ -715,7 +715,7 @@ VOID RTMPDrvClose(
 
 	}
 #endif /* CONFIG_STA_SUPPORT */
-
+	DBGPRINT_ERR(("RTMPDrvClose called, setting halt in progress flag!\n"));
 	RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_HALT_IN_PROGRESS);
 
 #ifdef EXT_BUILD_CHANNEL_LIST

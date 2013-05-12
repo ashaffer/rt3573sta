@@ -1917,6 +1917,7 @@ int rt_ioctl_siwencodeext(struct net_device *dev,
 	pIoctlSec->pData = (CHAR *)ext->key;
 	pIoctlSec->length = ext->key_len;
 	pIoctlSec->KeyIdx = (encoding->flags & IW_ENCODE_INDEX) - 1;
+	DBGPRINT(RT_DEBUG_ERROR, ("rt_ioctl_siwencodeext, alg: %d\tencoding->flags: %#1x\tKeyIdx: %d\r\n", alg, encoding->flags, pIoctlSec->KeyIdx));
 	if (alg == IW_ENCODE_ALG_NONE )
 		pIoctlSec->Alg = RT_CMD_STA_IOCTL_SECURITY_ALG_NONE;
 	else if (alg == IW_ENCODE_ALG_WEP)

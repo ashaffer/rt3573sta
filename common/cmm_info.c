@@ -1714,7 +1714,7 @@ NDIS_STATUS RTMPWPARemoveKeyProc(
 	{
 		/* a. If BSSID is broadcast, remove all group keys indexed*/
 		/* b. If BSSID matched, delete the group key indexed.*/
-		DBGPRINT(RT_DEBUG_TRACE,("RTMPWPARemoveKeyProc(KeyIdx=%ld)\n", KeyIdx));
+		DBGPRINT(RT_DEBUG_ERROR,("RTMPWPARemoveKeyProc(KeyIdx=%ld)\n", KeyIdx));
 		pAd->SharedKey[BSS0][KeyIdx].KeyLen = 0;
 		pAd->SharedKey[BSS0][KeyIdx].CipherAlg = CIPHER_NONE;
 		AsicRemoveSharedKeyEntry(pAd, BSS0, (UCHAR)KeyIdx);

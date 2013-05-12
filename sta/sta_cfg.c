@@ -6411,6 +6411,7 @@ RtmpIoctl_rt_ioctl_siwencodeext(
 	    AsicRemovePairwiseKeyEntry(pAd, BSSID_WCID);
         pAd->SharedKey[BSS0][keyIdx].KeyLen = 0;
 		pAd->SharedKey[BSS0][keyIdx].CipherAlg = CIPHER_NONE;
+		DBGPRINT(RT_DEBUG_ERROR, ("RtmpIoctl_rt_ioctl_siwencodeext, %d", keyIdx));
 		AsicRemoveSharedKeyEntry(pAd, 0, (UCHAR)keyIdx);
         NdisZeroMemory(&pAd->SharedKey[BSS0][keyIdx], sizeof(CIPHER_KEY));
         DBGPRINT(RT_DEBUG_TRACE, ("%s::Remove all keys!\n", __FUNCTION__));

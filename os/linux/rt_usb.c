@@ -227,8 +227,9 @@ static void rtusb_dataout_complete(unsigned long data)
 			pAd->bulkResetReq[BulkOutPipeId] = pAd->BulkOutReq;
 		}
 		RTMP_IRQ_UNLOCK(&pAd->BulkOutLock[BulkOutPipeId], IrqFlags);
-
-		DBGPRINT_RAW(RT_DEBUG_ERROR, ("BulkOutDataPacket failed: ReasonCode=%d!\n", Status));
+		FREE_HTTX_RING(pAd, BulkOutPipeId, pHTTXContext);			
+	
+		DBGPRINT_RAW(RT_DEBUG_ERROR, ("BulkOutDataPacket failed: ReasonCode=%d\tBulkOutPipeId: %d!\n", Status, BulkOutPipeId));
 		DBGPRINT_RAW(RT_DEBUG_ERROR, ("\t>>BulkOut Req=0x%lx, Complete=0x%lx, Other=0x%lx\n", pAd->BulkOutReq, pAd->BulkOutComplete, pAd->BulkOutCompleteOther));
 		DBGPRINT_RAW(RT_DEBUG_ERROR, ("\t>>BulkOut Header:%x %x %x %x %x %x %x %x\n", pBuf[0], pBuf[1], pBuf[2], pBuf[3], pBuf[4], pBuf[5], pBuf[6], pBuf[7]));
 		/*DBGPRINT_RAW(RT_DEBUG_ERROR, (">>BulkOutCompleteCancel=0x%x, BulkOutCompleteOther=0x%x\n", pAd->BulkOutCompleteCancel, pAd->BulkOutCompleteOther)); */
@@ -850,6 +851,7 @@ INT MlmeThread(
 	{
 		if (RtmpOSTaskWait(pAd, pTask, &status) == FALSE)
 		{
+			DBGPRINT_ERR(("RtmpOSTaskWait returned false in MlmeThread, setting halt in progress flag!\n"));
 			RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_HALT_IN_PROGRESS);
 			break;
 		}
@@ -921,6 +923,7 @@ INT RTUSBCmdThread(
 	{
 		if (RtmpOSTaskWait(pAd, pTask, &status) == FALSE)
 		{
+			DBGPRINT_ERR(("RtmpOSTaskWait returned false in RTUSBCmdThread, setting halt in progress flag!\n"));
 			RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_HALT_IN_PROGRESS);
 			break;
 		}

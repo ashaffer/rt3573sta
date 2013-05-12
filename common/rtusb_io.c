@@ -1773,7 +1773,7 @@ VOID RTUSBWatchDog(IN RTMP_ADAPTER *pAd)
 	RTMP_IO_READ32(pAd, TXRXQ_PCNT, &MACValue);
 	if ((MACValue & 0xff) !=0 )
 	{
-		DBGPRINT(RT_DEBUG_TRACE, ("TX QUEUE 0 Not EMPTY(Value=0x%0x). !!!!!!!!!!!!!!!\n", MACValue));
+		DBGPRINT(RT_DEBUG_ERROR, ("TX QUEUE 0 Not EMPTY(Value=0x%0x). !!!!!!!!!!!!!!!\n", MACValue));
 		RTMP_IO_WRITE32(pAd, PBF_CFG, 0xf40012);
 		while((MACValue &0xff) != 0 && (idx++ < 10))
 		{
@@ -1786,7 +1786,7 @@ VOID RTUSBWatchDog(IN RTMP_ADAPTER *pAd)
 	idx = 0;
 	if ((MACValue & 0xff00) !=0 )
 	{
-		DBGPRINT(RT_DEBUG_TRACE, ("TX QUEUE 1 Not EMPTY(Value=0x%0x). !!!!!!!!!!!!!!!\n", MACValue));
+		DBGPRINT(RT_DEBUG_ERROR, ("TX QUEUE 1 Not EMPTY(Value=0x%0x). !!!!!!!!!!!!!!!\n", MACValue));
 		RTMP_IO_WRITE32(pAd, PBF_CFG, 0xf4000a);
 		while((MACValue &0xff00) != 0 && (idx++ < 10))
 		{
@@ -1799,13 +1799,13 @@ VOID RTUSBWatchDog(IN RTMP_ADAPTER *pAd)
 
 	if (pAd->watchDogRxOverFlowCnt >= 2)
 	{
-		DBGPRINT(RT_DEBUG_TRACE, ("Maybe the Rx Bulk-In hanged! Cancel the pending Rx bulks request!\n"));
+		DBGPRINT(RT_DEBUG_ERROR, ("Maybe the Rx Bulk-In hanged! Cancel the pending Rx bulks request!\n"));
 		if ((!RTMP_TEST_FLAG(pAd, (fRTMP_ADAPTER_RESET_IN_PROGRESS |
 									fRTMP_ADAPTER_BULKIN_RESET |
 									fRTMP_ADAPTER_HALT_IN_PROGRESS |
 									fRTMP_ADAPTER_NIC_NOT_EXIST))))
 		{
-			DBGPRINT(RT_DEBUG_TRACE, ("Call CMDTHREAD_RESET_BULK_IN to cancel the pending Rx Bulk!\n"));
+			DBGPRINT(RT_DEBUG_ERROR, ("Call CMDTHREAD_RESET_BULK_IN to cancel the pending Rx Bulk!\n"));
 			RTMP_SET_FLAG(pAd, fRTMP_ADAPTER_BULKIN_RESET);
 			RTEnqueueInternalCmd(pAd, CMDTHREAD_RESET_BULK_IN, NULL, 0);
 			needDumpSeq = TRUE;
@@ -1862,10 +1862,10 @@ VOID RTUSBWatchDog(IN RTMP_ADAPTER *pAd)
 
 				RTMP_IRQ_UNLOCK(&pAd->BulkOutLock[idx], irqFlags);
 
-				DBGPRINT(RT_DEBUG_TRACE, ("Maybe the Tx Bulk-Out hanged! Cancel the pending Tx bulks request of idx(%d)!\n", idx));
+				DBGPRINT(RT_DEBUG_ERROR, ("Maybe the Tx Bulk-Out hanged! Cancel the pending Tx bulks request of idx(%d)!\n", idx));
 				if (pUrb)
 				{
-					DBGPRINT(RT_DEBUG_TRACE, ("Unlink the pending URB!\n"));
+					DBGPRINT(RT_DEBUG_ERROR, ("Unlink the pending URB!\n"));
 					/* unlink it now*/
 					RTUSB_UNLINK_URB(pUrb);
 					/* Sleep 200 microseconds to give cancellation time to work*/
@@ -1902,17 +1902,17 @@ VOID RTUSBWatchDog(IN RTMP_ADAPTER *pAd)
 		pBAEntry = &pAd->BATable.BARecEntry[Idx];
 		if((pBAEntry->list.qlen > 0) && (pBAEntry->list.next != NULL))
 		{
-			DBGPRINT(RT_DEBUG_TRACE, ("NICUpdateRawCounters():The Queueing pkt in reordering buffer:\n"));
+			DBGPRINT(RT_DEBUG_ERROR, ("NICUpdateRawCounters():The Queueing pkt in reordering buffer:\n"));
 			NdisAcquireSpinLock(&pBAEntry->RxReRingLock);
 			mpdu_blk = pBAEntry->list.next;
 			while (mpdu_blk)
 			{
-				DBGPRINT(RT_DEBUG_TRACE, ("\t%d:Seq-%d, bAMSDU-%d!\n", count, mpdu_blk->Sequence, mpdu_blk->bAMSDU));
+				DBGPRINT(RT_DEBUG_ERROR, ("\t%d:Seq-%d, bAMSDU-%d!\n", count, mpdu_blk->Sequence, mpdu_blk->bAMSDU));
 				mpdu_blk = mpdu_blk->next;
 				count++;
 			}
 
-			DBGPRINT(RT_DEBUG_TRACE, ("\npBAEntry->LastIndSeq=%d!\n", pBAEntry->LastIndSeq));
+			DBGPRINT(RT_DEBUG_ERROR, ("\npBAEntry->LastIndSeq=%d!\n", pBAEntry->LastIndSeq));
 			NdisReleaseSpinLock(&pBAEntry->RxReRingLock);
 		}
 	}

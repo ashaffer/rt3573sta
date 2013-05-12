@@ -55,7 +55,7 @@ static NDIS_STATUS RTMPFreeUsbBulkBufStruct(
 	IN ra_dma_addr_t data_dma)
 {
 	POS_COOKIE pObj = (POS_COOKIE) pAd->OS_Cookie;
-	
+	DBGPRINT_RAW(RT_DEBUG_ERROR, ("RTMPFreeUsbBulkBufStruct called\n"));
 	if (NULL != *ppUrb) {
 		RTUSB_UNLINK_URB(*ppUrb);
 		RTUSB_FREE_URB(*ppUrb);
@@ -79,7 +79,7 @@ VOID RTMPResetTxRxRingMemory(
 	PTX_CONTEXT pNullContext   = &pAd->NullContext;
 	PTX_CONTEXT pPsPollContext = &pAd->PsPollContext;
 	unsigned int IrqFlags;
-
+	DBGPRINT_RAW(RT_DEBUG_ERROR, ("RTMPResetTxRxRingMemory called!\n"));
 	/* Free TxSwQueue Packet*/
 	for (index = 0; index < NUM_OF_TX_RING; index++)
 	{
@@ -704,7 +704,7 @@ NDIS_STATUS	NICInitRecv(
 	POS_COOKIE			pObj = (POS_COOKIE) pAd->OS_Cookie;
 
 
-	DBGPRINT(RT_DEBUG_TRACE, ("--> NICInitRecv\n"));
+	DBGPRINT(RT_DEBUG_ERROR, ("--> NICInitRecv\n"));
 	pObj = pObj;
 
 	/*InterlockedExchange(&pAd->PendingRx, 0);*/
