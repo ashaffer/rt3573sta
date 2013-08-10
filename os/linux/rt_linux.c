@@ -665,7 +665,11 @@ PNDIS_PACKET ClonePacket(
 		pClonedPkt->dev = pRxPkt->dev;
 		pClonedPkt->data = pData;
 		pClonedPkt->len = DataSize;
+#ifdef NET_SKBUFF_DATA_USES_OFFSET
+		pClonedPkt->tail = (ULONG)pClonedPkt->data - (ULONG)pClonedPkt->head + pClonedPkt->len;
+#else
 		pClonedPkt->tail = pClonedPkt->data + pClonedPkt->len;
+#endif
 		ASSERT(DataSize < 1530);
 	}
 	return pClonedPkt;

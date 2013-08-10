@@ -1332,7 +1332,7 @@ VOID	RTMPReadChannelPwr(
 #endif /* (defined(RT30xx) && defined(RTMP_MAC_PCI)) || defined(RT3593) */
 #ifdef RT3593
 	EEPROM_TX_PWR_STRUC	    Power3;
-/*	UCHAR Tx0ALC = 0, Tx1ALC = 0, Tx2ALC = 0, Tx0FinePowerCtrl = 0, Tx1FinePowerCtrl = 0, Tx2FinePowerCtrl = 0*/;
+/*	UCHAR Tx0ALC = 0, Tx1ALC = 0, Tx2ALC = 0, Tx0FinePowerCtrl = 0, Tx1FinePowerCtrl = 0, Tx2FinePowerCtrl = 0;*/
 	UCHAR  Tx2ALC = 0, Tx2FinePowerCtrl = 0;
 	
 	EEPROM_ANTENNA_STRUC NICConfig0 = {{ 0 }};

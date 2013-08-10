@@ -852,7 +852,7 @@ static VOID RT3593_ChipSwitchChannel(
 					PreRFValue = RFValue;
 					/* xo_code (C1 value control) - Crystal calibration*/
 					RFValue = ((RFValue & ~0x7F) | (pAd->FreqCalibrationCtrl.AdaptiveFreqOffset & 0x7F));
-					RFValue = min(RFValue, 0x5F);
+					RFValue = min(RFValue, (UCHAR)0x5F);
 					if (PreRFValue != RFValue)
 					{
 
@@ -869,7 +869,7 @@ static VOID RT3593_ChipSwitchChannel(
 					PreRFValue = RFValue;
 					/* xo_code (C1 value control) - Crystal calibration*/
 					RFValue = ((RFValue & ~0x7F) | (pAd->RfFreqOffset & 0x7F));
-					RFValue = min(RFValue, 0x5F);
+					RFValue = min(RFValue, (UCHAR)0x5F);
 
 					if (PreRFValue != RFValue)
 					{
@@ -887,7 +887,7 @@ static VOID RT3593_ChipSwitchChannel(
 				RT30xxReadRFRegister(pAd, RF_R17, &RFValue);
 				PreRFValue = RFValue;
 				RFValue = ((RFValue & ~0x7F) | (pAd->RfFreqOffset & 0x7F)); /* xo_code (C1 value control) - Crystal calibration*/
-				RFValue = min(RFValue, 0x5F);
+				RFValue = min(RFValue, (UCHAR)0x5F);
 				if (PreRFValue != RFValue)
 				{
 
