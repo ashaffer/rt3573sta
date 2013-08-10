@@ -52,8 +52,10 @@ USB_DEVICE_ID rtusb_dev_id[] = {
 	{USB_DEVICE(0x148F,0x3573)}, /* Ralink 3573 */
 	{USB_DEVICE(0x7392,0x7733)}, /* Edimax */
 	{USB_DEVICE(0x0846,0x9012)}, /* Netgear WNDA4100 N900*/
+	{USB_DEVICE(0x050D,0x1103)}, /* Belkin F9L1103 */
 	{USB_DEVICE(0x0b05,0x1784)}, /* Asus USB-N13 */
-	{USB_DEVICE(0x050D,0x1103)},  /* Belkin F9L1103 */
+    {USB_DEVICE(0x0B05,0x17AD)}, /* ASUS USB-N66 */
+	{USB_DEVICE(0x0df6,0x006e)}, /* Sitecom WLA-6100 */
 #endif /* RT3573 */
 	{ }/* Terminating entry */
 };
