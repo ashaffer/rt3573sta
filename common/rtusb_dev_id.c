@@ -56,6 +56,7 @@ USB_DEVICE_ID rtusb_dev_id[] = {
 	{USB_DEVICE(0x0b05,0x1784)}, /* Asus USB-N13 */
     {USB_DEVICE(0x0B05,0x17AD)}, /* ASUS USB-N66 */
 	{USB_DEVICE(0x0df6,0x006e)}, /* Sitecom WLA-6100 */
+	{USB_DEVICE(0x13B1,0x003B)}, /* Cisco LinkSys AE3000 */
 #endif /* RT3573 */
 	{ }/* Terminating entry */
 };
